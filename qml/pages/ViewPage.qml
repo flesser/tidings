@@ -423,42 +423,6 @@ Page {
                 height: Theme.itemSizeLarge
 
                 ListItem {
-                    id: fullArticleButton
-                    width: parent.width / 2
-                    contentHeight: parent.height
-
-                    property bool _isFull: urlLoader.source != ""
-
-                    Image {
-                        id: fullArticleIcon
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.left: parent.left
-                        anchors.leftMargin: _pageMargin
-                        source: fullArticleButton._isFull ? "image://theme/icon-m-up"
-                                                          : "image://theme/icon-m-down"
-                    }
-
-                    Label {
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.left: fullArticleIcon.right
-                        anchors.leftMargin: Theme.paddingMedium
-                        text: fullArticleButton._isFull ? qsTr("Short article")
-                                                        : qsTr("Full article")
-                    }
-
-                    onClicked: {
-                        if (_isFull)
-                        {
-                            urlLoader.source = "";
-                        }
-                        else
-                        {
-                            urlLoader.source = itemData.link;
-                        }
-                    }
-                }
-
-                ListItem {
                     width: parent.width / 2
                     contentHeight: parent.height
 
@@ -484,6 +448,43 @@ Page {
                         pageStack.push(Qt.resolvedUrl("WebPage.qml"), props);
                     }
                 }
+
+                ListItem {
+                    id: fullArticleButton
+                    width: parent.width / 2
+                    contentHeight: parent.height
+
+                    property bool _isFull: urlLoader.source != ""
+
+                    Image {
+                        id: fullArticleIcon
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.right: parent.right
+                        anchors.rightMargin: _pageMargin
+                        source: fullArticleButton._isFull ? "image://theme/icon-m-up"
+                                                          : "image://theme/icon-m-down"
+                    }
+
+                    Label {
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.right: fullArticleIcon.left
+                        anchors.rightMargin: Theme.paddingMedium
+                        text: fullArticleButton._isFull ? qsTr("Short article")
+                                                        : qsTr("Full article")
+                    }
+
+                    onClicked: {
+                        if (_isFull)
+                        {
+                            urlLoader.source = "";
+                        }
+                        else
+                        {
+                            urlLoader.source = itemData.link;
+                        }
+                    }
+                }
+
             }
 
             /*
